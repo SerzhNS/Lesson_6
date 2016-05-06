@@ -2,25 +2,14 @@
 
 # ===================== Vagon ====================
 class Vagon
+
 	@@total_num = 0
-	attr_accessor :num, :type
 
+	attr_reader :num, :type
 
-	def initialize(type)
+	def initialize
 		@@total_num += 1
-		@type = type
+		@type = itself.class		# Тип вагона будем определять по значению класса его объекта
 		@num = @@total_num
 	end
 end
-
-class PassangerVagon < Vagon
-	def initialize(type = :pass)
-		super
-	end	
-end
-
-class CargoVagon < Vagon
-	def initialize(type = :carg)
-		super
-	end
-end	

@@ -1,11 +1,7 @@
 # ======================== Route ============================
 class Route
 
-  @@list_of_routes = {}
-
-  def self.list_of_routes
-    @@list_of_routes
-  end
+  attr_reader :list_of_route_stations
 
   def initialize(route_name, start_station, end_station)
     @route_name = route_name
@@ -18,14 +14,11 @@ class Route
       init = arr_all_stations.index(start_station)
       fin = arr_all_stations.index(end_station)
       @list_of_route_stations = arr_all_stations[init..fin]
-      @@list_of_routes[route_name] = @list_of_route_stations
       puts "Создан маршрут c именем #{route_name}."
       list_stations
     end
   end
 
-  private
-  
   def append_station(ind, station_name)
     if Station.list_of_stations[station_name]
       @list_of_route_stations.insert(ind, station_name)
