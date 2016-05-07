@@ -13,8 +13,8 @@
 
 class Train
 
-  attr_reader :train_num, :train_kind
-  attr_accessor :vagon_qnty, :cur_station, :route_name, :list_of_vagons, :speed, :stations_on_route
+  attr_reader :train_num, :train_kind, :list_of_vagons
+  attr_accessor :vagon_qnty, :cur_station, :route_name, :speed, :stations_on_route
   
   def initialize(train_num)
     @train_num = train_num.to_s
@@ -74,6 +74,15 @@ class Train
     where?
   end
 
+  # Это публичный метод повагонного дополнения состава поезда - как подметод формирования состава
+  def vagon_add(vagon)
+    vagon_type = vagon.class.to_s.split("Vagon")
+    train_type = @train_kind.to_s.split("Train")
+    @list_of_vagons << vagon if @speed == 0 && vagon_type == train_type
+  end
+
+
+
   protected
 
 
@@ -83,14 +92,6 @@ class Train
     puts "Поезд находится на станции #{@cur_station}." # Предыдущая станция - #{@stations_on_route[ind - 1] if ind != 0}. Следующая станция - #{@stations_on_route[ind + 1]}."
   end
   
-  
-  # Это приватный метод повагонного дополнения состава поезда - как подметод формирования состава
-  def vagon_add(vagon)
-    if @speed == 0
-      @list_of_vagons << vagon 
-    end
-  end
-
   # Это приватный метод повагонного сокращения состава поезда - как подметод формирования состава
   def vagon_ded
     if @speed == 0 && @list_of_vagons.count > 0
