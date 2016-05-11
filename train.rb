@@ -1,4 +1,5 @@
-# encoding: UTF-8
+# encodifindng: UTF-8
+
 
 # Объектная модель управления железнодорожным транспортом.
 # Крайняя версия от 02 мая 2016. Упрощенная.
@@ -13,14 +14,28 @@
 
 class Train
 
+  include Manufacturer
+  include InstanceCounter
+
   attr_reader :train_num, :train_kind, :list_of_vagons
   attr_accessor :vagon_qnty, :cur_station, :route_name, :speed, :stations_on_route
+
+  @@list_of_trains = {}
   
   def initialize(train_num)
     @train_num = train_num.to_s
     @speed = 0
     @train_kind = itself.class
     @list_of_vagons = []
+    @@list_of_trains[train_num] = itself
+    register_instance
+  end
+
+  class << self
+    def find(train_num)
+      @@list_of_trains[train_num]
+    end
+    
   end
 
   # Это публичный метод для дополнения состава заданным количестовм вагонов. Он использует private 
@@ -30,7 +45,7 @@ class Train
       if @train_kind == PassangerTrain
         vagon = PassangerVagon.new
       else
-        vagon = CagroVagon.new
+        vagon = CargoVagon.new
       end 
       vagon_add(vagon)
     end

@@ -1,15 +1,20 @@
+
 # ======================== Station ============================
 class Station
+
+  include Manufacturer
+  include InstanceCounter
 
   attr_reader :list_hosting_trains, :station_name
 
   @@list_of_stations = {}
 
-  def self.list_of_stations
+  def self.all
     @@list_of_stations
   end
 
   def initialize(station_name)
+    register_instance
     @station_name = station_name
     @list_hosting_trains = []
     @@list_of_stations[station_name] = {}

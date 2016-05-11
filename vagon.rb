@@ -3,13 +3,13 @@
 # ===================== Vagon ====================
 class Vagon
 
-	@@total_num = 0
+	include Manufacturer
+	include InstanceCounter
 
 	attr_reader :num, :type
 
 	def initialize
-		@@total_num += 1
+		@@num = register_instance
 		@type = itself.class		# Тип вагона будем определять по значению класса его объекта
-		@num = @@total_num
 	end
 end

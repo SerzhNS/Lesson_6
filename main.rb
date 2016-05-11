@@ -2,6 +2,8 @@
 # encodung: UTF-8
 
 # => Обеспечить через текстовый (строчный) 
+require_relative "manufacturer.rb"
+require_relative "instancecounter.rb"
 
 require_relative "vagon.rb"
 require_relative "route.rb"
