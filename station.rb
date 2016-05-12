@@ -2,8 +2,9 @@
 # ======================== Station ============================
 class Station
 
-  include Manufacturer
   include InstanceCounter
+  include InstanceMethods
+  
 
   attr_reader :list_hosting_trains, :station_name
 
@@ -14,7 +15,7 @@ class Station
   end
 
   def initialize(station_name)
-    register_instance
+    register_instance(self)
     @station_name = station_name
     @list_hosting_trains = []
     @@list_of_stations[station_name] = {}

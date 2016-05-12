@@ -16,7 +16,7 @@ class Train
 
   include Manufacturer
   include InstanceCounter
-
+ 
   attr_reader :train_num, :train_kind, :list_of_vagons
   attr_accessor :vagon_qnty, :cur_station, :route_name, :speed, :stations_on_route
 
@@ -28,7 +28,7 @@ class Train
     @train_kind = itself.class
     @list_of_vagons = []
     @@list_of_trains[train_num] = itself
-    register_instance
+    register_instance(self)
   end
 
   class << self

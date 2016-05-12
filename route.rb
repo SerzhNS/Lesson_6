@@ -2,13 +2,12 @@
 # ======================== Route ============================
 class Route
 
-  include Manufacturer
   include InstanceCounter
 
   attr_reader :list_of_route_stations
 
   def initialize(route_name, start_station, end_station)
-    register_instance
+    register_instance(self)
     @route_name = route_name
     if !Station.all.include?(start_station)
       puts "Станции с названием #{start_station} нет с списке станций. Вначале инициализируйте станицю с эти именем. Создать маршрут нельзя."

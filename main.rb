@@ -14,6 +14,10 @@ require_relative "cargotrain.rb"
 require_relative "passangervagon.rb"
 require_relative "cargovagon.rb"
 
+include InstanceCounter
+include InstanceMethods
+include ClassMethods
+
 instruction = ["1. Создание станций и маршрутов", "2. Создание поездов", "3. Добавление вагонов к поезду", 
   "4. Отцепление вагонов от поезда", "5. Перемещение поезда по станциям маршрута", "6. Просмотр списка станций и списка поездов на станциях"]
 puts "Выберите номер операции для исполнения. Пустой ввод будет означать завершение всех операций."
@@ -39,6 +43,7 @@ loop do
           station_qnty += 1 
         end
       end
+      puts (instances(Station))
       puts "Вы задали следующий список станций: #{stations}.
       Введите название маршрута и две станции из этого списка, которые зададут маршрут движения поезда."
       route_name ="__"
@@ -80,6 +85,7 @@ loop do
           entry_end = true
           break
         end
+        puts (instances(Train))
       end
     when 3 then
       # => 3. Добавление вагонов к поезду
@@ -127,6 +133,7 @@ loop do
     when 6 then
   # => 6. Просмотр списка станций и списка поездов на станциях
       puts "Список станций и принятых поездов: #{stations}"
+      puts (instances(Station))
       puts "Если Вы хотите посмотреть поезда на конкретной станции, то введите ее имя."
       station_name = gets.chomp.to_s
       if station_name != "" && stations.include?(station_name)
