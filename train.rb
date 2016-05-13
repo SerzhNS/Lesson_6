@@ -28,7 +28,7 @@ class Train
     @train_kind = itself.class
     @list_of_vagons = []
     @@list_of_trains[train_num] = itself
-    register_instance(self)
+    register_instance
   end
 
   class << self

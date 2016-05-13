@@ -3,11 +3,11 @@
 
 # => Обеспечить через текстовый (строчный) 
 require_relative "manufacturer.rb"
-require_relative "instancecounter.rb"
+require_relative "instancecounter_example.rb"
 
 require_relative "vagon.rb"
 require_relative "route.rb"
-require_relative "station.rb"
+require_relative "station2.rb"
 require_relative "train.rb"
 require_relative "passangertrain.rb"
 require_relative "cargotrain.rb"
@@ -43,7 +43,7 @@ loop do
           station_qnty += 1 
         end
       end
-      puts (instances(Station))
+      puts (Station.instances)
       puts "Вы задали следующий список станций: #{stations}.
       Введите название маршрута и две станции из этого списка, которые зададут маршрут движения поезда."
       route_name ="__"
@@ -85,7 +85,7 @@ loop do
           entry_end = true
           break
         end
-        puts (instances(Train))
+        puts (Train.instances)
       end
     when 3 then
       # => 3. Добавление вагонов к поезду
@@ -133,7 +133,7 @@ loop do
     when 6 then
   # => 6. Просмотр списка станций и списка поездов на станциях
       puts "Список станций и принятых поездов: #{stations}"
-      puts (instances(Station))
+      puts (Station.instances)
       puts "Если Вы хотите посмотреть поезда на конкретной станции, то введите ее имя."
       station_name = gets.chomp.to_s
       if station_name != "" && stations.include?(station_name)

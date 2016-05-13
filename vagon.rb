@@ -9,7 +9,7 @@ class Vagon
 	attr_reader :num, :type
 
 	def initialize
-		@@num = register_instance(self)
+		@@num = register_instance
 		@type = self.class		# Тип вагона будем определять по значению класса его объекта
 	end
 end
