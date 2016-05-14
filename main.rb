@@ -15,8 +15,6 @@ require_relative "passangervagon.rb"
 require_relative "cargovagon.rb"
 
 include InstanceCounter
-#include InstanceMethods
-#include ClassMethods
 
 instruction = ["1. Создание станций и маршрутов", "2. Создание поездов", "3. Добавление вагонов к поезду", 
   "4. Отцепление вагонов от поезда", "5. Перемещение поезда по станциям маршрута", "6. Просмотр списка станций и списка поездов на станциях"]
