@@ -25,25 +25,35 @@ trains = {}
 stations = {}
 routes ={}
 
+STATION_TEMP = /\w+/
+
 loop do
   operation = gets.chomp.to_i
   case (operation)
     when 1 then
       # => 1. Создание станций и маршрутов
-      puts "Необходимо задать, как минимум, две станции. По завершении нажмте пустой ввод."
+      puts "Необходимо задать, через запятую, как минимум, две станции. По завершении нажмте пустой ввод."
+      station_name_arr = gets.chomp.split(",")
+      station_name_arr.each do |station_name|  
       station_qnty = 0
-      station_name = "_"
-      until station_name == "" && station_qnty >= 2
-        station_name = gets.chomp
-        break if station_name == "" && station_qnty >= 2
-        if station_name != "" 
-          stations[station_name] = Station.new(station_name)
-          station_qnty += 1 
-        end
+      trys_qnty = 0
+	      5.times do
+	        begin
+		        break if station_name.empty? && station_qnty >= 2
+	      		raise if station_name !~ STATION_TEMP 
+	          stations[station_name] = Station.new(station_name)	
+	          station_qnty += 1 
+	      	rescue RuntimeError
+	      		trys_qnty += 1
+	      		puts "Введите еще раз с правильным шаблоном."
+	      		raise "Неверный формат названия станции." if trys_qnty >= 3
+	      		station_name = gets.chomp
+	      	end
+	      end	
       end
-      puts (Station.instances)
-      puts "Вы задали следующий список станций: #{stations}.
-      Введите название маршрута и две станции из этого списка, которые зададут маршрут движения поезда."
+
+      puts "Вы задали следующий список станций: #{stations.keys}.
+Введите название маршрута и две станции из этого списка, которые зададут маршрут движения поезда."
       route_name ="__"
       until route_name ==""
         route_name = gets.chomp
