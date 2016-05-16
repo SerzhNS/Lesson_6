@@ -5,6 +5,7 @@ class Vagon
 
 	include Manufacturer
 	include InstanceCounter
+#	include Validation
 
 	attr_reader :type
 

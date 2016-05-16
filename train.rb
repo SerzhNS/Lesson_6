@@ -16,24 +16,25 @@ class Train
 
   include Manufacturer
   include InstanceCounter
+#  include Validation
  
-  attr_reader :train_num, :list_of_vagons
+  attr_reader :name, :list_of_vagons
   attr_accessor :cur_station, :route_name, :speed, :stations_on_route
 
   @@list_of_trains = {}
   
-  def initialize(train_num, manufacturer = "TVZ")
-    @train_num = train_num.to_s
+  def initialize(name, manufacturer = "TVZ")
+    @name = name.to_s
     @speed = 0
     self.man_name = manufacturer
     @list_of_vagons = []
-    @@list_of_trains[train_num] = itself
+    @@list_of_trains[name] = itself
     register_instance
   end
 
   class << self
-    def find(train_num)
-      @@list_of_trains[train_num]
+    def find(name)
+      @@list_of_trains[name]
     end
     
   end
@@ -49,8 +50,8 @@ class Train
       end 
       vagon_add(vagon)
     end
-    puts "Количество вагонов в составе #{self.class} поезда № #{@train_num} увеличено до #{@list_of_vagons.count}"
-    puts "Список вагонов : #{@list_of_vagons}"
+#    puts "Количество вагонов в составе #{self.class} поезда № #{@name} увеличено до #{@list_of_vagons.count}"
+#    puts "Список вагонов : #{@list_of_vagons}"
   end
 
   # Это публичный метод для дополнения состава заданным количестовм вагонов. Он использует private 
@@ -59,7 +60,7 @@ class Train
     qnty.times do 
       self.vagon_ded
     end
-    puts "Количество вагонов в составе #{self.class} поезда № #{@train_num} уменьшено до #{@list_of_vagons.count}"
+    puts "Количество вагонов в составе #{self.class} поезда № #{@name} уменьшено до #{@list_of_vagons.count}"
   end
 
   # Публичными методами departure & arriving поезд перемещается между станциями, указанными в маршруте,
@@ -68,7 +69,7 @@ class Train
   def departure(station)
     10.times { self.speed_up }
     station.train_departed(self)
-    puts "Поезд отправляется со станции #{station.station_name}"
+    puts "Поезд отправляется со станции #{station.name}"
   end
 
   def arriving(station)
@@ -76,8 +77,8 @@ class Train
       self.slow_down
     end
     station.train_arrived(self)
-    @cur_station = station.station_name
-    puts "Поезд прибывает на станцию #{station.station_name}"
+    @cur_station = station.name
+    puts "Поезд прибывает на станцию #{station.name}"
   end
 
   # Помещение поезда на начальной станции маршрута - это приватный метод, поскольку является частью более общего метоа

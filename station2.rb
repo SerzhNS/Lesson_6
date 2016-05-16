@@ -3,9 +3,10 @@
 class Station
 
   include InstanceCounter
+#  include Validation
 
   attr_accessor :list_hosting_trains
-  attr_reader :station_name
+  attr_reader :name
 
   @@list_of_stations_as_objects = {}
 
@@ -13,16 +14,16 @@ class Station
     @@list_of_stations_as_objects
   end
 
-  def initialize(station_name)
+  def initialize(name)
     register_instance
-    @station_name = station_name
+    @name = name
     @list_hosting_trains = []
-    @@list_of_stations_as_objects[station_name] = self
+    @@list_of_stations_as_objects[name] = self
   end
 
   # train_kind принимает значения 
   def list_trains_by_kind(train_kind)
-    puts "Список поездов типа #{train_kind}, находящихся на станции #{@station_name} : #{@list_hosting_trains.rassoc(train_kind)}"
+    puts "Список поездов типа #{train_kind}, находящихся на станции #{@name} : #{@list_hosting_trains.rassoc(train_kind)}"
     self.list_hosting_trains.each { |e| puts e.train_num if e.class == train_kind  }
   end
 
